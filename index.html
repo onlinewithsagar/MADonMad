@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>MADonMAD | Mobile Application Development</title>
     <meta name="description" content="Master Mobile Application Development for the BCU BCA Examination. High-yield notes, predicted papers, and strategies.">
     
@@ -39,6 +39,7 @@
             --search-bg: rgba(0, 0, 0, 0.95);
         }
 
+        /* --- Global Reset & Typography --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; font-size: 16px; }
         body {
@@ -63,6 +64,7 @@
         ul, ol { margin-bottom: 1.5rem; padding-left: 1.5rem; color: var(--text-secondary); }
         li { margin-bottom: 0.5rem; }
 
+        /* --- Utilities & Layouts --- */
         .container { max-width: 900px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
         .section { padding: 120px 0; }
         .section-sm { padding: 40px 0; }
@@ -72,6 +74,7 @@
         
         .badge { display: inline-block; padding: 4px 10px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; background: var(--text-primary); color: var(--bg-primary); border-radius: 99px; margin-left: 12px; vertical-align: middle; }
 
+        /* --- Navigation Bar --- */
         nav {
             position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
             width: calc(100% - 32px); max-width: 900px; z-index: 200;
@@ -82,11 +85,15 @@
             transition: background-color var(--transition-smooth), border-color var(--transition-smooth);
         }
         .nav-inner { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; }
+        .nav-top { display: flex; align-items: center; justify-content: space-between; flex-grow: 0; }
         .brand { font-size: 1.25rem; font-weight: 900; letter-spacing: -0.05em; text-transform: uppercase; flex-shrink: 0; margin-right: 20px;}
-        .nav-links { display: flex; gap: 8px; align-items: center; }
+        
+        .nav-links { display: flex; gap: 8px; align-items: center; flex-wrap: nowrap; overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none; }
+        .nav-links::-webkit-scrollbar { display: none; }
         .nav-links a { 
             font-size: 0.875rem; font-weight: 700; color: var(--text-secondary); 
-            padding: 8px 16px; border-radius: 100px; transition: var(--transition-fast); 
+            padding: 8px 16px; border-radius: 100px; transition: var(--transition-fast);
+            white-space: nowrap; /* CRITICAL FIX: Prevent wrapping */
         }
         .nav-links a:hover, .nav-links a.active { color: var(--bg-primary); background-color: var(--text-primary); }
         
@@ -95,12 +102,13 @@
             border: 2px solid var(--border-heavy); padding: 8px 18px;
             font-size: 0.85rem; font-weight: 800; font-family: var(--font-sans);
             cursor: pointer; border-radius: 100px; transition: var(--transition-fast);
-            flex-shrink: 0;
+            flex-shrink: 0; white-space: nowrap;
         }
         .btn:hover { background: var(--text-primary); color: var(--bg-primary); }
         
         #progress-bar { position: fixed; top: 0; left: 0; height: 4px; background: var(--text-primary); width: 0%; z-index: 300; transition: width 0.1s; }
 
+        /* --- Hero Section --- */
         .hero { padding: 180px 0 60px; }
         .hero p { font-size: 1.25rem; max-width: 700px; margin: 0 auto; color: var(--text-secondary); font-weight: 500; }
         
@@ -110,6 +118,7 @@
         .stat-card h3 { font-size: 3rem; margin-bottom: 8px; color: var(--text-primary); letter-spacing: -0.05em; }
         .stat-card p { font-size: 0.875rem; font-weight: 800; text-transform: uppercase; margin: 0; color: var(--text-secondary); letter-spacing: 0.05em; }
 
+        /* --- Sticky Search Bar --- */
         .sticky-search-wrapper {
             position: sticky; top: 90px; z-index: 150;
             padding: 16px 0; background-color: var(--search-bg);
@@ -127,6 +136,7 @@
         .search-box input:focus { border-color: var(--text-primary); background: var(--bg-primary); }
         .search-icon { position: absolute; left: 44px; top: 50%; transform: translateY(-50%); opacity: 0.5; pointer-events: none; }
 
+        /* --- Accordion Topics --- */
         .topic-group-title { font-size: 1.5rem; margin: 64px 0 24px; padding-bottom: 16px; border-bottom: 2px solid var(--border-heavy); }
         
         .topic-card { border: 1px solid var(--border-color); border-radius: var(--radius-md); margin-bottom: 16px; background: var(--bg-primary); transition: var(--transition-fast); overflow: hidden; }
@@ -159,6 +169,7 @@
         .custom-checkbox:checked { background: var(--text-primary); border-color: var(--text-primary); }
         .custom-checkbox:checked::before { transform: scale(1); }
 
+        /* --- Instagram-Style Story Flashcards --- */
         .story-wrapper { margin: 32px 0 64px; display: flex; justify-content: center; }
         .story-container {
             width: 100%; max-width: 400px; height: 500px;
@@ -179,11 +190,11 @@
         .story-content h4 { font-size: 1.5rem; margin: 0 0 16px 0; border: none; padding: 0; }
         .story-content p { font-size: 1.1rem; color: var(--text-secondary); margin: 0; line-height: 1.6; }
         
-        /* Tap Zones */
         .tap-zone-left { position: absolute; top: 0; left: 0; width: 40%; height: 100%; z-index: 5; cursor: pointer; }
         .tap-zone-right { position: absolute; top: 0; right: 0; width: 60%; height: 100%; z-index: 5; cursor: pointer; }
         .story-hint { position: absolute; bottom: 16px; left: 0; width: 100%; text-align: center; font-size: 0.75rem; font-weight: 700; color: var(--border-color); text-transform: uppercase; letter-spacing: 0.1em; pointer-events: none; }
 
+        /* --- Code & Block Diagrams --- */
         pre { background: var(--code-bg); border: 1px solid var(--border-color); padding: 24px; border-radius: var(--radius-md); overflow-x: auto; margin: 24px 0; position: relative; }
         code { font-family: var(--font-mono); font-size: 0.875rem; color: var(--text-primary); }
         .copy-btn { position: absolute; top: 12px; right: 12px; padding: 6px 12px; font-size: 0.75rem; border-radius: 6px; background: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-primary); cursor: pointer; transition: var(--transition-fast); font-weight: 700; z-index: 5;}
@@ -193,6 +204,7 @@
         .block-layer { padding: 16px; border: 1px solid var(--border-color); text-align: center; font-weight: 700; font-family: var(--font-mono); font-size: 0.875rem; background: var(--bg-primary); border-radius: 6px; transition: var(--transition-fast); }
         .block-layer:hover { border-color: var(--text-primary); }
 
+        /* --- Dashboard --- */
         .dashboard-card {
             border: 2px solid var(--border-color); border-radius: var(--radius-lg);
             padding: 48px; display: flex; align-items: center; justify-content: space-between;
@@ -204,6 +216,7 @@
         .progress-bar-svg { fill: none; stroke: var(--text-primary); stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset 1s cubic-bezier(0.16, 1, 0.3, 1); }
         .progress-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 2rem; font-weight: 800; letter-spacing: -0.05em; }
 
+        /* --- Papers & Strategy --- */
         .paper-card { border: 2px solid var(--border-heavy); border-radius: var(--radius-lg); padding: 48px; position: relative; background: var(--bg-primary); margin-bottom: 40px; box-shadow: 0 12px 40px rgba(0,0,0,0.03); }
         .confidential-tag { position: absolute; top: -16px; left: 40px; background: var(--text-primary); color: var(--bg-primary); padding: 4px 16px; font-weight: 900; font-family: var(--font-mono); letter-spacing: 0.1em; font-size: 0.9rem; border-radius: 4px; }
         
@@ -213,17 +226,20 @@
 
         footer { padding: 120px 0 80px; text-align: center; border-top: 1px solid var(--border-color); background: var(--bg-primary); }
         
+        /* --- Mobile Overrides (Crucial Fixes) --- */
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
+            
+            /* Nav Fixes */
             nav { border-radius: 0; top: 0; width: 100%; max-width: 100%; border-left: none; border-right: none; border-top: none; }
-            .nav-inner { padding: 12px 16px; gap: 16px; display: flex; flex-wrap: wrap; }
-            .brand { width: 50%; }
-            .nav-links { overflow-x: auto; width: 100%; justify-content: flex-start; padding-bottom: 8px; order: 3; }
-            .nav-links::-webkit-scrollbar { display: none; }
-            .nav-links { -ms-overflow-style: none; scrollbar-width: none; }
-
+            .nav-inner { padding: 12px 16px; gap: 12px; display: flex; flex-direction: column; height: auto; align-items: flex-start; }
+            .nav-top { width: 100%; display: flex; justify-content: space-between; align-items: center; }
+            .nav-links { width: 100%; overflow-x: auto; padding-bottom: 4px; gap: 12px; justify-content: flex-start; }
+            
             .hero { padding: 140px 0 40px; }
-            .sticky-search-wrapper { top: 105px; }
+            
+            /* Sticky Search Mobile Offset */
+            .sticky-search-wrapper { top: 105px; padding: 12px 0; }
 
             .dashboard-card { flex-direction: column; text-align: center; gap: 32px; padding: 32px 24px; }
             .topic-content { padding: 0 20px 24px 20px; }
@@ -244,8 +260,10 @@
 
     <nav>
         <div class="nav-inner">
-            <div class="brand">✦ MADonMAD</div>
-            <button id="theme-toggle" class="btn">Dark Mode</button>
+            <div class="nav-top">
+                <div class="brand">✦ MADonMAD</div>
+                <button id="theme-toggle" class="btn">Dark Mode</button>
+            </div>
             <div class="nav-links">
                 <a href="#hero" class="nav-item active">Home</a>
                 <a href="#topics" class="nav-item">Data Bank</a>
@@ -444,6 +462,35 @@ startActivity(intent);</code><button class="copy-btn">Copy</button></pre>
                 </div>
 
                 <h3 class="topic-group-title">Unit 2 & 3: UI, Layouts, Fragments & Dialogs</h3>
+
+                <!-- TOPIC: Views & Anchoring -->
+                <div class="topic-card">
+                    <div class="topic-header">
+                        <div class="topic-title-area">
+                            <input type="checkbox" class="custom-checkbox topic-check" aria-label="Mark completed">
+                            Views, ViewGroups & Anchoring Attributes
+                            <span class="badge">5M</span>
+                        </div>
+                        <svg class="topic-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                    <div class="topic-content-wrapper">
+                        <div class="topic-content-inner">
+                            <div class="topic-content">
+                                <h4>View vs ViewGroup</h4>
+                                <p><strong>View:</strong> The basic building block of a UI (e.g., Button, TextView, EditText). It occupies a rectangular area on the screen and handles drawing and events.</p>
+                                <p><strong>ViewGroup:</strong> An invisible container that holds multiple Views or other ViewGroups to define layout structure (e.g., LinearLayout, RelativeLayout).</p>
+                                
+                                <h4>Anchoring Views (RelativeLayout)</h4>
+                                <p>Anchoring refers to positioning a UI element relative to the physical edges of its parent container or in relation to sibling elements within the same layout.</p>
+                                <ul>
+                                    <li><code>android:layout_alignParentTop="true"</code>: Anchors the view to the top edge of the parent.</li>
+                                    <li><code>android:layout_below="@+id/header"</code>: Anchors the view directly beneath the 'header' sibling.</li>
+                                    <li><code>android:layout_toRightOf="@+id/icon"</code>: Anchors the view to the right side of the 'icon' sibling.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- TOPIC: Layouts Performance -->
                 <div class="topic-card">
@@ -812,7 +859,7 @@ manager.createNotificationChannel(channel);</code><button class="copy-btn">Copy<
                 </ol>
             </div>
 
-            <!-- PREDICTED PAPER: 10/4/2 Pattern (Moved to Bottom) -->
+            <!-- PREDICTED PAPER: 10/4/2 Pattern -->
             <div class="paper-card">
                 <div class="confidential-tag">BCU PREDICTED MOCK (10/4/2 PATTERN)</div>
                 
