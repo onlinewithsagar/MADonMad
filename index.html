@@ -7,6 +7,9 @@
     <meta name="description" content="Master Mobile Application Development for the BCU BCA Examination. High-yield notes, predicted papers, and strategies.">
     
     <style>
+        /* ==========================================================================
+           1. CSS VARIABLES & THEME SYSTEM
+           ========================================================================== */
         :root {
             /* Light Theme (Apple/Notion Inspired) */
             --bg-primary: #ffffff;
@@ -48,6 +51,9 @@
             --shadow-card: 0 4px 20px rgba(255, 255, 255, 0.02);
         }
 
+        /* ==========================================================================
+           2. RESET & BASE TYPOGRAPHY
+           ========================================================================== */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         html { scroll-behavior: smooth; font-size: 16px; }
@@ -76,6 +82,9 @@
         ul, ol { margin-bottom: 1.5rem; padding-left: 1.5rem; color: var(--text-secondary); font-size: 1.05rem; }
         li { margin-bottom: 0.5rem; }
 
+        /* ==========================================================================
+           3. LAYOUT & UTILITIES
+           ========================================================================== */
         .container { max-width: 900px; margin: 0 auto; padding: 0 24px; position: relative; }
         .section { padding: 100px 0; border-bottom: 1px solid var(--border-light); }
         .section:last-child { border-bottom: none; }
@@ -96,6 +105,9 @@
 
         #progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--text-primary); width: 0%; z-index: 1001; transition: width 0.1s; }
 
+        /* ==========================================================================
+           4. FLOATING NAVBAR (Pill Design)
+           ========================================================================== */
         nav {
             position: fixed;
             top: 24px;
@@ -117,6 +129,7 @@
         }
         
         .brand { font-size: 1.125rem; font-weight: 800; letter-spacing: -0.03em; }
+        .brand span { color: var(--text-secondary); font-weight: 400; }
         
         .nav-links-wrapper { flex: 1; display: flex; justify-content: center; overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none; }
         .nav-links-wrapper::-webkit-scrollbar { display: none; }
@@ -131,12 +144,16 @@
             font-size: 0.85rem; font-weight: 700; font-family: var(--font-sans);
             cursor: pointer; border-radius: var(--radius-pill); transition: var(--transition-fast);
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            display: flex; align-items: center; gap: 6px;
         }
         .btn:hover { background: var(--text-primary); color: var(--bg-primary); border-color: var(--text-primary); }
         
+        /* ==========================================================================
+           5. HERO SECTION
+           ========================================================================== */
         .hero { padding: 180px 0 100px; }
         .hero-pill { 
-            display: inline-block; padding: 6px 16px; border-radius: var(--radius-pill); 
+            display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: var(--radius-pill); 
             background: var(--bg-secondary); color: var(--text-primary); border: 1px solid var(--border-light);
             font-size: 0.85rem; font-weight: 700; margin-bottom: 24px; letter-spacing: 0.05em; text-transform: uppercase;
         }
@@ -150,6 +167,9 @@
         .stat-card h3 { font-size: 3rem; margin-bottom: 4px; letter-spacing: -0.05em; }
         .stat-card p { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin: 0; color: var(--text-secondary); }
 
+        /* ==========================================================================
+           6. DASHBOARD & SVG CIRCLE
+           ========================================================================== */
         .dashboard-card {
             border-radius: var(--radius-lg); padding: 48px; border: 1px solid var(--border-light);
             display: flex; align-items: center; justify-content: space-between;
@@ -164,125 +184,141 @@
         .progress-bar-svg { fill: none; stroke: var(--text-primary); stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset 1s cubic-bezier(0.16, 1, 0.3, 1); }
         .progress-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 2rem; font-weight: 800; letter-spacing: -0.05em; }
 
+        /* ==========================================================================
+           7. COMMAND PALETTE SEARCH
+           ========================================================================== */
         .search-box { position: relative; margin-bottom: 48px; }
         .search-box input {
-            width: 100%; padding: 24px 24px 24px 64px; font-size: 1.25rem; font-family: var(--font-sans);
-            background: var(--bg-primary); border: 1px solid var(--border-light); color: var(--text-primary);
-            border-radius: var(--radius-lg); outline: none; transition: var(--transition-smooth);
-            font-weight: 500; box-shadow: var(--shadow-card);
+            width: 100%; padding: 24px 24px 24px 64px; font-size: 1.15rem; font-family: var(--font-sans);
+            background: var(--bg-secondary); border: 1px solid var(--border-light); color: var(--text-primary);
+            border-radius: var(--radius-md); outline: none; transition: var(--transition-smooth);
+            font-weight: 500;
         }
-        .search-box input:focus { border-color: var(--text-primary); box-shadow: var(--shadow-float); }
-        .search-icon { position: absolute; left: 24px; top: 50%; transform: translateY(-50%); color: var(--text-secondary); pointer-events: none; }
+        .search-box input:focus { background: var(--bg-primary); border-color: var(--text-primary); box-shadow: var(--shadow-float); }
+        .search-icon { position: absolute; left: 24px; top: 50%; transform: translateY(-50%); opacity: 0.5; pointer-events: none; }
+        .search-shortcut { position: absolute; right: 24px; top: 50%; transform: translateY(-50%); font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-secondary); background: var(--bg-tertiary); padding: 4px 8px; border-radius: 6px; border: 1px solid var(--border-light); }
 
-        .topic-group-title { font-size: 1.125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin: 48px 0 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border-light); }
+        /* ==========================================================================
+           8. ACCORDION (DATA BANK)
+           ========================================================================== */
+        .topic-group-title { font-size: 1.25rem; font-weight: 800; margin: 48px 0 24px; display: flex; align-items: center; gap: 12px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+        .topic-group-title::before { content: '✦'; color: var(--text-primary); }
         
-        .topic-card { border: 1px solid var(--border-light); border-radius: var(--radius-md); margin-bottom: 16px; background: var(--bg-primary); transition: var(--transition-fast); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
-        .topic-header { padding: 24px; display: flex; align-items: flex-start; justify-content: space-between; cursor: pointer; user-select: none; transition: background var(--transition-fast); }
-        .topic-header:hover { background: var(--bg-secondary); }
+        .topic-card { border: 1px solid var(--border-light); border-radius: var(--radius-md); margin-bottom: 16px; background: var(--bg-primary); overflow: hidden; transition: box-shadow var(--transition-fast); }
+        .topic-card:hover { box-shadow: var(--shadow-card); }
+        .topic-header { padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; user-select: none; }
         
-        .topic-title-area { display: flex; align-items: flex-start; flex: 1; }
-        .topic-title-text { font-size: 1.15rem; font-weight: 700; color: var(--text-primary); line-height: 1.4; display: flex; flex-wrap: wrap; gap: 12px; align-items: center;}
-        .topic-icon { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); color: var(--text-secondary); margin-left: 16px; flex-shrink: 0; margin-top: 2px;}
+        .topic-title-area { display: flex; align-items: center; font-size: 1.1rem; font-weight: 700; color: var(--text-primary); flex: 1; padding-right: 16px; }
+        .topic-icon { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); flex-shrink: 0; }
         
-        /* Accordion Physics */
         .topic-content-wrapper { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         .topic-content-inner { overflow: hidden; }
-        .topic-content { padding: 0 24px 32px 64px; border-top: 1px solid transparent; transition: border-color 0.4s; }
+        .topic-content { padding: 0 24px 24px 64px; }
         
-        .topic-card.open { border-color: var(--text-primary); box-shadow: var(--shadow-card); margin-bottom: 24px; }
+        .topic-card.open { border-color: var(--text-primary); }
         .topic-card.open .topic-content-wrapper { grid-template-rows: 1fr; }
-        .topic-card.open .topic-content { border-top-color: var(--border-light); padding-top: 24px; }
-        .topic-card.open .topic-icon { transform: rotate(180deg); color: var(--text-primary); }
+        .topic-card.open .topic-content { padding-top: 16px; }
+        .topic-card.open .topic-icon { transform: rotate(180deg); }
 
-        /* Elegant Checkbox */
+        /* Custom SVG Checkbox */
         .custom-checkbox {
             appearance: none; width: 24px; height: 24px; border: 2px solid var(--border-light);
-            border-radius: 8px; margin-right: 16px; margin-top: 2px; cursor: pointer; position: relative;
-            transition: var(--transition-fast); display: grid; place-content: center;
-            background: var(--bg-primary); flex-shrink: 0;
+            border-radius: 6px; margin-right: 16px; cursor: pointer; position: relative;
+            background: var(--bg-secondary); flex-shrink: 0; transition: all var(--transition-fast);
         }
-        .custom-checkbox::before {
-            content: ""; width: 10px; height: 10px; transform: scale(0);
-            box-shadow: inset 1em 1em var(--bg-primary);
-            transform-origin: bottom left; clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        .custom-checkbox:hover { border-color: var(--text-secondary); }
         .custom-checkbox:checked { background: var(--text-primary); border-color: var(--text-primary); }
-        .custom-checkbox:checked::before { transform: scale(1); }
+        .custom-checkbox:checked::after {
+            content: ''; position: absolute; left: 7px; top: 3px; width: 6px; height: 12px;
+            border: solid var(--bg-primary); border-width: 0 2px 2px 0; transform: rotate(45deg);
+        }
 
-        pre { background: var(--bg-secondary); border: 1px solid var(--border-light); padding: 24px; border-radius: var(--radius-md); overflow-x: auto; margin: 24px 0; position: relative; }
-        pre::-webkit-scrollbar { height: 6px; }
-        pre::-webkit-scrollbar-track { background: transparent; }
-        pre::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 4px; }
-        code { font-family: var(--font-mono); font-size: 0.875rem; color: var(--text-primary); line-height: 1.6; }
-        
-        .copy-btn { position: absolute; top: 12px; right: 12px; padding: 6px 12px; font-size: 0.75rem; border-radius: var(--radius-sm); background: var(--bg-primary); border: 1px solid var(--border-light); color: var(--text-primary); cursor: pointer; transition: var(--transition-fast); font-weight: 700; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        /* ==========================================================================
+           9. CODE & DIAGRAMS
+           ========================================================================== */
+        pre { background: var(--code-bg); border: 1px solid var(--border-light); padding: 20px; border-radius: var(--radius-sm); overflow-x: auto; margin: 16px 0; position: relative; }
+        code { font-family: var(--font-mono); font-size: 0.9rem; color: var(--text-primary); line-height: 1.5; }
+        .copy-btn { position: absolute; top: 12px; right: 12px; padding: 6px 12px; font-size: 0.75rem; border-radius: var(--radius-pill); background: var(--bg-primary); border: 1px solid var(--border-light); color: var(--text-primary); cursor: pointer; transition: var(--transition-fast); font-weight: 700; font-family: var(--font-sans); }
         .copy-btn:hover { background: var(--text-primary); color: var(--bg-primary); }
         
-        .block-diagram { display: flex; flex-direction: column-reverse; gap: 8px; margin: 24px 0; padding: 24px; background: var(--bg-secondary); border-radius: var(--radius-md); border: 1px solid var(--border-light); }
-        .block-layer { padding: 16px; border: 1px solid var(--border-light); text-align: center; font-weight: 700; font-size: 0.95rem; background: var(--bg-primary); transition: var(--transition-fast); border-radius: var(--radius-sm); }
-        .block-layer:hover { border-color: var(--text-primary); transform: translateY(-2px); box-shadow: var(--shadow-card); }
-
-        .qa-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
-        .qa-card { padding: 24px; border: 1px solid var(--border-light); border-radius: var(--radius-md); background: var(--bg-secondary); }
-        .qa-card h4 { margin-top: 0; font-size: 1.05rem; }
-        .qa-card p { margin: 0; font-size: 0.95rem; }
-
-        .paper-card { border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 56px; position: relative; background: var(--bg-primary); box-shadow: var(--shadow-card); }
-        .confidential-tag { position: absolute; top: -14px; right: 40px; background: var(--bg-primary); border: 1px solid var(--text-primary); border-radius: var(--radius-pill); padding: 4px 16px; font-weight: 800; font-family: var(--font-mono); letter-spacing: 0.1em; font-size: 0.8rem; color: var(--text-primary); }
+        /* Architecture Grid Box */
+        .arch-box { display: flex; flex-direction: column-reverse; gap: 8px; margin: 24px 0; padding: 20px; background: var(--bg-secondary); border-radius: var(--radius-sm); border: 1px solid var(--border-light); }
+        .arch-layer { padding: 14px; border: 1px solid var(--border-light); text-align: center; font-weight: 600; font-family: var(--font-mono); font-size: 0.85rem; background: var(--bg-primary); border-radius: 6px; display: flex; justify-content: space-between; align-items: center; }
         
-        .strategy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-top: 40px; }
-        .strategy-item { padding: 32px; background: var(--bg-primary); border: 1px solid var(--border-light); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); }
-        .strategy-item h3 { padding-bottom: 16px; border-bottom: 1px solid var(--border-light); margin-bottom: 16px; }
+        /* Flashcard Grid */
+        .qa-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 16px; }
+        .qa-card { padding: 20px; border: 1px solid var(--border-light); border-radius: var(--radius-md); background: var(--bg-secondary); }
+        .qa-card h4 { margin-top: 0; font-size: 1rem; padding: 0; margin-bottom: 8px; border: none; display: flex; align-items: center; gap: 8px; }
+        .qa-card h4::before { content: '↳'; color: var(--text-secondary); }
+        .qa-card p { margin: 0; font-size: 0.95rem; color: var(--text-secondary); }
 
-        footer { padding: 80px 0 60px; text-align: center; }
-        .circle-anim { width: 48px; height: 48px; border: 4px solid var(--border-light); border-top-color: var(--text-primary); border-radius: 50%; margin: 0 auto 32px; animation: spin 1s linear infinite; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
+        /* ==========================================================================
+           10. PAPER & STRATEGY
+           ========================================================================== */
+        .paper-card { border: 2px solid var(--border-heavy); border-radius: var(--radius-lg); padding: 48px; position: relative; background: var(--bg-primary); box-shadow: var(--shadow-card); }
+        .confidential-tag { position: absolute; top: -14px; left: 40px; background: var(--bg-primary); padding: 0 16px; font-weight: 800; font-family: var(--font-mono); letter-spacing: 0.1em; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
+        
+        .strategy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-top: 32px; }
+        .strategy-item { padding: 32px; background: var(--bg-primary); border: 1px solid var(--border-light); border-radius: var(--radius-md); transition: var(--transition-fast); }
+        .strategy-item:hover { border-color: var(--text-primary); }
+        .strategy-item h3 { padding-bottom: 16px; border-bottom: 1px solid var(--border-light); margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; }
+        
+        ul.custom-list { list-style: none; padding-left: 0; }
+        ul.custom-list li { position: relative; padding-left: 24px; margin-bottom: 12px; }
+        ul.custom-list li::before { content: '◉'; position: absolute; left: 0; top: 2px; font-size: 0.8rem; color: var(--text-secondary); }
 
+        /* ==========================================================================
+           11. FOOTER (CLEAN, NO LOADING ANIMATION)
+           ========================================================================== */
+        footer { padding: 100px 0 60px; text-align: center; background: var(--bg-primary); }
+        .footer-quote { font-size: 2.5rem; max-width: 800px; margin: 0 auto 2rem; line-height: 1.3; font-weight: 800; letter-spacing: -0.03em; }
+        .footer-signature { font-size: 0.9rem; color: var(--text-secondary); margin-top: 60px; font-family: var(--font-mono); display: flex; flex-direction: column; gap: 8px; align-items: center;}
+
+        /* ==========================================================================
+           12. RESPONSIVE OPTIMIZATIONS
+           ========================================================================== */
         @media (max-width: 768px) {
-            /* Mobile Floating Nav Adjustment */
-            nav {
-                top: 16px; width: calc(100% - 32px);
-                padding: 12px 16px; border-radius: var(--radius-lg);
-                flex-wrap: wrap; gap: 12px;
-            }
-            .brand { width: 50%; font-size: 1rem; }
-            #theme-toggle { padding: 6px 12px; font-size: 0.75rem; }
-            .nav-links-wrapper { width: 100%; order: 3; padding-bottom: 4px; border-top: 1px solid var(--border-light); padding-top: 12px; }
-            .nav-links { gap: 20px; padding: 0 4px; }
-            
-            /* Typography & Spacing */
-            h1 { font-size: 2.25rem; }
-            h2 { font-size: 1.75rem; }
+            h1 { font-size: 2.5rem; }
             .section { padding: 80px 0; }
+            nav { top: 12px; width: calc(100% - 24px); padding: 12px; border-radius: var(--radius-md); flex-direction: column; align-items: flex-start; gap: 12px; }
+            .nav-inner-top { display: flex; justify-content: space-between; width: 100%; align-items: center; }
+            .nav-links-wrapper { width: 100%; justify-content: flex-start; padding-bottom: 4px; }
+            .nav-links { gap: 20px; padding: 0; }
+            
             .hero { padding: 160px 0 60px; }
-            .hero-stats { grid-template-columns: 1fr; gap: 16px; margin-top: 48px; }
+            .hero-stats { grid-template-columns: 1fr; gap: 16px; }
             
-            /* Dashboard & Cards */
             .dashboard-card { flex-direction: column; text-align: center; gap: 32px; padding: 32px 24px; }
-            .dashboard-info p { margin: 0 auto; }
             
-            .search-box input { padding: 20px 20px 20px 56px; font-size: 1.1rem; }
+            .search-box input { font-size: 1rem; padding: 16px 16px 16px 56px; }
+            .search-shortcut { display: none; }
             
-            /* Accordions (Touch targets) */
-            .topic-header { padding: 20px; }
-            .topic-title-text { font-size: 1.05rem; }
-            .topic-content { padding: 0 20px 24px 56px; }
+            .topic-content { padding: 0 20px 24px 20px; }
+            .topic-header { padding: 16px 20px; align-items: flex-start; }
+            .topic-title-area { font-size: 1.05rem; align-items: flex-start; }
+            .custom-checkbox { margin-top: 2px; }
             
-            /* EdgetoEdge Code Blocks */
-            pre { padding: 16px; margin: 16px -24px; border-radius: 0; border-left: none; border-right: none; }
-            .copy-btn { right: 28px; }
+            .paper-card { padding: 32px 24px; }
+            .confidential-tag { left: 24px; top: -12px; }
             
-            .paper-card { padding: 40px 24px; }
-            .confidential-tag { right: 24px; font-size: 0.7rem; }
+            .footer-quote { font-size: 1.75rem; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Top Progress Bar -->
     <div id="progress-bar"></div>
+
+    <!-- Floating Navbar -->
     <nav>
-        <div class="brand">MADonMAD.</div>
+        <div class="nav-inner-top">
+            <div class="brand">MAD<span>onMAD</span></div>
+            <button id="theme-toggle" class="btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                <span id="theme-text">Dark</span>
+            </button>
+        </div>
         <div class="nav-links-wrapper">
             <div class="nav-links">
                 <a href="#hero" class="nav-item active">Home</a>
@@ -292,14 +328,17 @@
                 <a href="#strategy" class="nav-item">Strategy</a>
             </div>
         </div>
-        <button id="theme-toggle" class="btn">Dark Mode</button>
     </nav>
 
+    <!-- Hero Section -->
     <header id="hero" class="section hero text-center">
         <div class="container">
-            <div class="hero-pill">BCU Examination Blueprint</div>
-            <h1>Master Mobile Application<br>Development.</h1>
-            <p style="margin-top: 24px;">Built exclusively for BCU students. High-yield predicted topics, architectural deep-dives, comprehensive mock papers, and GeeksforGeeks-standard notes.</p>
+            <div class="hero-pill">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                BCU Exam Prep 2026
+            </div>
+            <h1>Nail the Preparation.<br>Secure the Marks.</h1>
+            <p>Built exclusively for BCU BCA students. High-yield predicted topics, architectural deep-dives, comprehensive mock papers, and GeeksforGeeks-standard notes.</p>
             
             <div class="hero-stats">
                 <div class="stat-card">
@@ -307,26 +346,27 @@
                     <p>Accuracy Prediction</p>
                 </div>
                 <div class="stat-card">
-                    <h3>45+</h3>
+                    <h3>50+</h3>
                     <p>Solved Questions</p>
                 </div>
                 <div class="stat-card">
                     <h3>1</h3>
-                    <p>Goal: Top Marks</p>
+                    <p>Single Goal: Top Marks</p>
                 </div>
             </div>
         </div>
     </header>
 
+    <!-- Dashboard Section -->
     <section id="dashboard" class="section">
         <div class="container">
             <h2>Student Success Dashboard</h2>
             <p>Track your revision progress. Your data is stored securely in your local browser cache.</p>
             
-            <div class="dashboard-card" style="margin-top: 40px;">
+            <div class="dashboard-card" style="margin-top: 32px;">
                 <div class="dashboard-info">
                     <h3 id="readiness-title">Initiate Preparation</h3>
-                    <p id="readiness-desc">Select topics below to begin tracking your exam readiness.</p>
+                    <p id="readiness-desc">Select topics in the Data Bank below to begin tracking your exam readiness.</p>
                 </div>
                 
                 <div class="progress-container">
@@ -340,28 +380,29 @@
         </div>
     </section>
 
+    <!-- Data Bank (Topics) Section -->
     <section id="topics" class="section">
         <div class="container">
             <h2>The Data Bank</h2>
-            <p>Comprehensive answers derived from GeeksforGeeks standards. <strong>Search instantly</strong> or expand units to study.</p>
+            <p>Comprehensive answers derived from GeeksforGeeks standards, covering every crucial BCU syllabus topic. <strong>Search instantly</strong> or expand units to study.</p>
             
-            <div class="search-box" style="margin-top: 40px;">
-                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                <input type="text" id="searchInput" placeholder="Search architectures, lifecycles, SQLite, Intents...">
+            <div class="search-box">
+                <svg class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="searchInput" placeholder="Search architectures, lifecycles, SQLite...">
+                <span class="search-shortcut">⌘ K</span>
             </div>
 
             <div id="topics-container">
                 
-                <div class="topic-group-title">Unit 1: Architecture & Deployment</div>
+                <h3 class="topic-group-title">Unit 1: Architecture, Lifecycles & Deployment</h3>
 
+                <!-- 1. Architecture -->
                 <div class="topic-card">
                     <div class="topic-header">
                         <div class="topic-title-area">
-                            <input type="checkbox" class="custom-checkbox topic-check" aria-label="Mark completed">
-                            <div class="topic-title-text">
-                                Android Architecture: The 5-Layer Stack
-                                <span class="badge">10M</span>
-                            </div>
+                            <input type="checkbox" class="custom-checkbox topic-check">
+                            Android Architecture: The 5-Layer Stack
+                            <span class="badge">10M</span>
                         </div>
                         <svg class="topic-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
                     </div>
@@ -370,34 +411,32 @@
                             <div class="topic-content">
                                 <p>GeeksforGeeks describes Android's architecture as a Linux-based software stack. Understanding how these layers interact is a guaranteed high-mark question.</p>
                                 
-                                <div class="block-diagram">
-                                    <div class="block-layer">5. System & User Applications</div>
-                                    <div class="block-layer">4. Application Framework (Java/Kotlin API)</div>
-                                    <div class="block-layer">3. Android Runtime (ART) & Native Libraries</div>
-                                    <div class="block-layer">2. Hardware Abstraction Layer (HAL)</div>
-                                    <div class="block-layer">1. Linux Kernel</div>
+                                <div class="arch-box">
+                                    <div class="arch-layer"><span>5. Applications</span> <span>📱</span></div>
+                                    <div class="arch-layer"><span>4. Application Framework (Java/Kotlin API)</span> <span>🛠️</span></div>
+                                    <div class="arch-layer"><span>3. Android Runtime (ART) & Native Libraries</span> <span>⚙️</span></div>
+                                    <div class="arch-layer"><span>2. Hardware Abstraction Layer (HAL)</span> <span>🔗</span></div>
+                                    <div class="arch-layer"><span>1. Linux Kernel</span> <span>🐧</span></div>
                                 </div>
 
-                                <ul>
-                                    <li><strong>Linux Kernel:</strong> Acts as an abstraction layer between hardware and upper layers. Manages Memory, Processes, and Device Drivers (Display, Camera). <em>Analogy: The foundation and wiring of a house.</em></li>
-                                    <li><strong>Hardware Abstraction Layer (HAL):</strong> Provides standard interfaces exposing hardware capabilities to the higher-level API.</li>
-                                    <li><strong>ART & Native Libraries:</strong> Uses Ahead-Of-Time (AOT) compilation, translating your app's bytecode into native machine code. Results in faster app launches.</li>
+                                <ul class="custom-list">
+                                    <li><strong>Linux Kernel:</strong> Acts as an abstraction layer between hardware and upper layers. Manages Memory, Processes, and Device Drivers (Display, Camera, Bluetooth).</li>
+                                    <li><strong>Hardware Abstraction Layer (HAL):</strong> Provides standard interfaces exposing hardware capabilities to the higher-level API framework.</li>
+                                    <li><strong>ART & Native Libraries:</strong> Uses Ahead-Of-Time (AOT) compilation, translating bytecode into native machine code during installation. Results in faster app launches over legacy DVM (JIT). Native libraries include SQLite, OpenGL ES.</li>
                                     <li><strong>Application Framework:</strong> Toolkit for developers (ActivityManager, ViewSystem, ContentProviders).</li>
-                                    <li><strong>Applications:</strong> Where your compiled `.apk` resides.</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- 2. Lifecycle -->
                 <div class="topic-card">
                     <div class="topic-header">
                         <div class="topic-title-area">
-                            <input type="checkbox" class="custom-checkbox topic-check" aria-label="Mark completed">
-                            <div class="topic-title-text">
-                                Activity Lifecycle: State Machine Breakdown
-                                <span class="badge">95% Prob</span>
-                            </div>
+                            <input type="checkbox" class="custom-checkbox topic-check">
+                            Activity Lifecycle: State Machine Breakdown
+                            <span class="badge">8M</span>
                         </div>
                         <svg class="topic-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
                     </div>
@@ -405,33 +444,26 @@
                         <div class="topic-content-inner">
                             <div class="topic-content">
                                 <p>An Activity is a single, focused thing that the user can do. The OS strictly manages its states to preserve battery and memory.</p>
-                                <ul>
+                                <ul class="custom-list">
                                     <li><strong>Active/Running State:</strong> Activity is on screen and holds user focus (<code>onResume()</code>).</li>
-                                    <li><strong>Paused State:</strong> Visible but lacks focus (e.g., a dialog is over it). Alive in memory (<code>onPause()</code>).</li>
+                                    <li><strong>Paused State:</strong> Visible but lacks focus (e.g., a transparent dialog is over it). Alive in memory but can be killed if RAM is critically low (<code>onPause()</code>).</li>
                                     <li><strong>Stopped State:</strong> Completely hidden by another activity. Retained in memory but no execution (<code>onStop()</code>).</li>
                                 </ul>
-                                <h4>GfG Real-Life Scenario Triggers</h4>
-                                <p>Scenario: User filling out a form, and a phone call comes in.<br>
-                                1. App is Running: <code>onResume()</code><br>
-                                2. Call Screen Appears: <code>onPause()</code> (Save user form text here!).<br>
-                                3. Call goes full screen: <code>onStop()</code><br>
-                                4. Call ends, user returns: <code>onRestart()</code> &rarr; <code>onStart()</code> &rarr; <code>onResume()</code>.</p>
-                                
                                 <h4>Handling Screen Orientation</h4>
-                                <p>Rotation destroys and recreates the Activity. To prevent data loss, developers must use <code>onSaveInstanceState()</code>.</p>
+                                <p>Rotation destroys and recreates the Activity: <code>onPause()</code> &rarr; <code>onStop()</code> &rarr; <code>onDestroy()</code> &rarr; <code>onCreate()</code> &rarr; <code>onStart()</code> &rarr; <code>onResume()</code>.</p>
+                                <p>To prevent data loss, developers must use <code>onSaveInstanceState()</code> to bundle data before destruction.</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- 3. Intents & Manifest -->
                 <div class="topic-card">
                     <div class="topic-header">
                         <div class="topic-title-area">
                             <input type="checkbox" class="custom-checkbox topic-check">
-                            <div class="topic-title-text">
-                                Intents, Data Passing & AndroidManifest
-                                <span class="badge">5M</span>
-                            </div>
+                            Intents, Data Passing & AndroidManifest
+                            <span class="badge">5M</span>
                         </div>
                         <svg class="topic-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
                     </div>
@@ -439,65 +471,87 @@
                         <div class="topic-content-inner">
                             <div class="topic-content">
                                 <h4>Explicit vs Implicit Intents</h4>
-                                <p>An <strong>Intent</strong> is a messaging object used to request an action.</p>
-                                <ul>
-                                    <li><strong>Explicit Intent:</strong> Specifies the exact Activity class. Used for internal navigation.
+                                <ul class="custom-list">
+                                    <li><strong>Explicit Intent:</strong> Specifies the exact Activity class to open. Used for internal navigation.
                                         <pre><code>Intent intent = new Intent(this, SecondActivity.class);
 intent.putExtra("key", "value"); // Passing Data
 startActivity(intent);</code><button class="copy-btn">Copy</button></pre>
                                     </li>
-                                    <li><strong>Implicit Intent:</strong> Declares a general action and lets the OS find an app.
+                                    <li><strong>Implicit Intent:</strong> Declares a general action and lets the OS find an app to handle it.
                                         <pre><code>Intent intent = new Intent(Intent.ACTION_VIEW);
-intent.setData(Uri.parse("https://geeksforgeeks.org"));
+intent.setData(Uri.parse("https://bcu.ac.in"));
 startActivity(intent);</code><button class="copy-btn">Copy</button></pre>
                                     </li>
                                 </ul>
                                 <h4>AndroidManifest.xml</h4>
-                                <p>The blueprint read by the OS. Declares components, permissions, and sets the entry point using an <code>intent-filter</code>.</p>
+                                <p>The structural blueprint read by the OS. It declares components, requests permissions (<code>&lt;uses-permission&gt;</code>), and sets the entry point using an <code>intent-filter</code> with MAIN and LAUNCHER.</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="topic-group-title">Unit 2 & 3: UI & Fragments</div>
-
+                <!-- 4. Publishing -->
                 <div class="topic-card">
                     <div class="topic-header">
                         <div class="topic-title-area">
                             <input type="checkbox" class="custom-checkbox topic-check">
-                            <div class="topic-title-text">
-                                Layout Performance: Linear vs Constraint
-                                <span class="badge">8M</span>
-                            </div>
+                            Publishing & APK Generation Steps
+                            <span class="badge">5M</span>
                         </div>
                         <svg class="topic-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
                     </div>
                     <div class="topic-content-wrapper">
                         <div class="topic-content-inner">
                             <div class="topic-content">
-                                <ul>
-                                    <li><strong>LinearLayout:</strong> Arranges children in a single row or column. Causes performance issues if deeply nested (Double Taxation).</li>
-                                    <li><strong>ConstraintLayout:</strong> Creates a <em>flat view hierarchy</em>. Every UI element has rules attaching it to parent or sibling elements, maximizing performance.</li>
+                                <ol class="custom-list">
+                                    <li>Go to <strong>Build</strong> &rarr; <strong>Generate Signed Bundle / APK</strong> in Android Studio.</li>
+                                    <li>Select <strong>APK</strong> (or App Bundle).</li>
+                                    <li>Under Key store path, click <strong>Create new...</strong> and fill in Keystore details (Password, Alias, Validity).</li>
+                                    <li>Select the Destination Folder and choose Build Variants (Release).</li>
+                                    <li>Select Signature Versions (V1/V2) and click Finish.</li>
+                                    <li>Upload the generated Signed Release APK to the Google Play Console after creating a Developer Account.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="topic-group-title">Unit 2 & 3: UI, Layouts, Fragments & Dialogs</h3>
+
+                <!-- 5. Layouts -->
+                <div class="topic-card">
+                    <div class="topic-header">
+                        <div class="topic-title-area">
+                            <input type="checkbox" class="custom-checkbox topic-check">
+                            Layout Performance: Linear vs Constraint
+                            <span class="badge">8M</span>
+                        </div>
+                        <svg class="topic-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                    <div class="topic-content-wrapper">
+                        <div class="topic-content-inner">
+                            <div class="topic-content">
+                                <ul class="custom-list">
+                                    <li><strong>LinearLayout:</strong> Arranges children in a single row or column. Easy to use but causes performance issues if deeply nested (The Measurement Problem).</li>
+                                    <li><strong>ConstraintLayout:</strong> The ultimate solution. Creates a <em>flat view hierarchy</em>. Elements have rules attaching them to parent/sibling elements, eliminating deep nesting and maximizing rendering performance.</li>
                                 </ul>
                                 <pre><code>&lt;androidx.constraintlayout.widget.ConstraintLayout&gt;
-    &lt;TextView android:id="@+id/titleText"
-              app:layout_constraintTop_toTopOf="parent" /&gt;
+    &lt;TextView android:id="@+id/title" app:layout_constraintTop_toTopOf="parent" /&gt;
     &lt;!-- Button directly anchors to TextView below --&gt;
-    &lt;Button android:id="@+id/submitBtn"
-            app:layout_constraintTop_toBottomOf="@id/titleText" /&gt;
+    &lt;Button app:layout_constraintTop_toBottomOf="@id/title" /&gt;
 &lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</code><button class="copy-btn">Copy</button></pre>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- 6. Fragments & Menus -->
                 <div class="topic-card">
                     <div class="topic-header">
                         <div class="topic-title-area">
                             <input type="checkbox" class="custom-checkbox topic-check">
-                            <div class="topic-title-text">
-                                Fragments, Menus & Dialogs
-                            </div>
+                            Fragments, Menus & Dialogs
+                            <span class="badge">5M/8M</span>
                         </div>
                         <svg class="topic-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
                     </div>
@@ -505,44 +559,44 @@ startActivity(intent);</code><button class="copy-btn">Copy</button></pre>
                         <div class="topic-content-inner">
                             <div class="topic-content">
                                 <h4>Fragments</h4>
-                                <p>A modular sub-section of an Activity. Managed via <code>FragmentManager</code>.</p>
+                                <p>A modular, reusable sub-section of an Activity. Managed via <code>FragmentManager</code>.</p>
                                 <pre><code>FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
 tx.replace(R.id.container, new HomeFragment());
 tx.commit();</code><button class="copy-btn">Copy</button></pre>
                                 
-                                <h4>Menus & Dialogs</h4>
-                                <ul>
-                                    <li><strong>Options Menu:</strong> Global menu. <code>onCreateOptionsMenu()</code>.</li>
-                                    <li><strong>Context Menu:</strong> Tied to a specific View via long-press.</li>
-                                    <li><strong>Dialogs:</strong> AlertDialog (Confirmations), DatePickerDialog (Input).</li>
+                                <h4>Menus</h4>
+                                <ul class="custom-list">
+                                    <li><strong>Options Menu:</strong> Global menu (top right). Programmed via <code>onCreateOptionsMenu()</code>.</li>
+                                    <li><strong>Context Menu:</strong> Tied to a View. Invoked by long-pressing. Programmed via <code>onCreateContextMenu()</code>.</li>
                                 </ul>
+                                
+                                <h4>Dialogs</h4>
+                                <p><strong>AlertDialog:</strong> Standard popup for warnings/choices. <strong>DatePickerDialog:</strong> UI to select dates.</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="topic-group-title">Unit 4: Database & Services</div>
+                <h3 class="topic-group-title">Unit 4: Database, Providers, Services & Networking</h3>
 
+                <!-- 7. SQLite -->
                 <div class="topic-card">
                     <div class="topic-header">
                         <div class="topic-title-area">
                             <input type="checkbox" class="custom-checkbox topic-check">
-                            <div class="topic-title-text">
-                                SQLite Database: Cursors and CRUD Workflow
-                                <span class="badge">8M/10M</span>
-                            </div>
+                            SQLite Database: Cursors and CRUD Workflow
+                            <span class="badge">8M/10M</span>
                         </div>
                         <svg class="topic-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
                     </div>
                     <div class="topic-content-wrapper">
                         <div class="topic-content-inner">
                             <div class="topic-content">
-                                <p>Local data persistence using <code>SQLiteOpenHelper</code> requires understanding the <strong>Cursor</strong> object. A Cursor provides random read-write access to query results.</p>
-                                
+                                <p>Local data persistence using <code>SQLiteOpenHelper</code> requires understanding the <strong>Cursor</strong> object. A Cursor provides random read-write access to database query results.</p>
                                 <pre><code>// 1. CREATE Table (in onCreate)
 db.execSQL("CREATE TABLE users(id INTEGER PRIMARY KEY, name TEXT)");
 
-// 2. INSERT (Create)
+// 2. INSERT
 ContentValues cv = new ContentValues();
 cv.put("name", "John");
 db.insert("users", null, cv);
@@ -554,11 +608,9 @@ public ArrayList&lt;String&gt; getAllUsers() {
     Cursor cursor = db.rawQuery("SELECT * FROM users", null);
     
     if (cursor.moveToFirst()) {
-        do {
-            list.add(cursor.getString(1)); // Column 1 is Name
-        } while (cursor.moveToNext()); 
+        do { list.add(cursor.getString(1)); } while (cursor.moveToNext()); 
     }
-    cursor.close(); db.close();
+    cursor.close(); db.close(); // Prevent leaks!
     return list;
 }</code><button class="copy-btn">Copy</button></pre>
                             </div>
@@ -566,70 +618,141 @@ public ArrayList&lt;String&gt; getAllUsers() {
                     </div>
                 </div>
 
+                <!-- 8. Providers & SharedPreferences -->
                 <div class="topic-card">
                     <div class="topic-header">
                         <div class="topic-title-area">
                             <input type="checkbox" class="custom-checkbox topic-check">
-                            <div class="topic-title-text">
-                                SharedPreferences & Content Providers
-                                <span class="badge">92% Prob</span>
-                            </div>
+                            Content Providers (IPC) & SharedPreferences
+                            <span class="badge">8M</span>
                         </div>
                         <svg class="topic-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
                     </div>
                     <div class="topic-content-wrapper">
                         <div class="topic-content-inner">
                             <div class="topic-content">
-                                <h4>SharedPreferences: Sync vs Async</h4>
-                                <p>Stores primitive data in XML files.</p>
-                                <ul>
-                                    <li><code>commit()</code>: Writes synchronously (UI thread). Can freeze UI.</li>
-                                    <li><code>apply()</code>: Writes asynchronously in background. <strong>GfG recommended.</strong></li>
-                                </ul>
-
-                                <h4>Content Providers (IPC)</h4>
-                                <p>Standard interface connecting data in one process with code running in another.</p>
-                                <ul>
-                                    <li><strong>The Source:</strong> An app safely exposes SQLite tables via a Provider.</li>
+                                <h4>Content Providers</h4>
+                                <p>A standard interface connecting data in one process with code running in another.</p>
+                                <ul class="custom-list">
+                                    <li><strong>The Source:</strong> An app exposes internal SQLite tables safely.</li>
+                                    <li><strong>The Request:</strong> Custom app uses <code>ContentResolver</code> to ask the system for data.</li>
                                     <li><strong>The Bridge (URI):</strong> <code>content://&lt;authority&gt;/&lt;path&gt;/&lt;id&gt;</code> routes the request.</li>
                                 </ul>
+
+                                <h4>SharedPreferences</h4>
+                                <p>Stores primitive data in XML files. Use <code>apply()</code> for async writing (recommended) instead of <code>commit()</code> (sync UI blocking).</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="topic-group-title">Fast Flashcards</div>
-
+                <!-- 9. Advanced: Networking, API 26+, Coroutines -->
                 <div class="topic-card">
                     <div class="topic-header">
                         <div class="topic-title-area">
                             <input type="checkbox" class="custom-checkbox topic-check">
-                            <div class="topic-title-text">
-                                Section A (2-Mark Definitions)
-                                <span class="badge outline">Quick Review</span>
-                            </div>
+                            Networking, Background Threads & Notifications
+                            <span class="badge">High Yield</span>
                         </div>
                         <svg class="topic-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
                     </div>
                     <div class="topic-content-wrapper">
                         <div class="topic-content-inner">
                             <div class="topic-content">
+                                <h4>Networking & JSON Parsing</h4>
+                                <p>Android strictly forbids network operations on the Main UI Thread (<code>NetworkOnMainThreadException</code>). Use <code>HttpURLConnection</code> in a background thread to fetch data, then parse using <code>JSONObject</code>.</p>
+                                
+                                <h4>Background Threads (AsyncTask vs Coroutines)</h4>
+                                <ul class="custom-list">
+                                    <li><strong>AsyncTask:</strong> Legacy, deprecated method due to memory leaks. Provided <code>doInBackground()</code> and <code>onPostExecute()</code>.</li>
+                                    <li><strong>Kotlin Coroutines / ExecutorService:</strong> The modern standard. Lightweight threads that execute background tasks without blocking the UI.</li>
+                                </ul>
+
+                                <h4>Notifications (API 26+)</h4>
+                                <p>Since Android 8.0 (Oreo), notifications <strong>must</strong> be assigned to a <code>NotificationChannel</code> via the <code>NotificationManager</code>, allowing users to control specific types of alerts rather than blocking the entire app.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 10. Services & Location -->
+                <div class="topic-card">
+                    <div class="topic-header">
+                        <div class="topic-title-area">
+                            <input type="checkbox" class="custom-checkbox topic-check">
+                            Services, Location Providers & Sensors
+                            <span class="badge">5M/8M</span>
+                        </div>
+                        <svg class="topic-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                    <div class="topic-content-wrapper">
+                        <div class="topic-content-inner">
+                            <div class="topic-content">
+                                <h4>Services</h4>
+                                <ul class="custom-list">
+                                    <li><strong>Started:</strong> Runs indefinitely (e.g., file download).</li>
+                                    <li><strong>Bound:</strong> Client-Server interface. Runs while bounded to an Activity.</li>
+                                    <li><strong>Foreground:</strong> Must display a status bar notification (e.g., Music Player).</li>
+                                </ul>
+
+                                <h4>Location Services & Sensors</h4>
+                                <p>Use <code>FusedLocationProviderClient</code> for battery-efficient GPS tracking over the legacy <code>LocationManager</code>. Hardware sensors (like Accelerometer) are accessed using <code>SensorManager</code> and implementing a <code>SensorEventListener</code>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="topic-group-title">Flashcards: 2-Mark Question Bank</h3>
+
+                <!-- 11. QA Section -->
+                <div class="topic-card open"> <!-- Open by default to show density -->
+                    <div class="topic-header">
+                        <div class="topic-title-area">
+                            <input type="checkbox" class="custom-checkbox topic-check">
+                            Part A & Section A (Rapid Fire Definitions)
+                            <span class="badge outline">Flashcards</span>
+                        </div>
+                        <svg class="topic-icon" style="transform: rotate(180deg);" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                    <div class="topic-content-wrapper" style="grid-template-rows: 1fr;">
+                        <div class="topic-content-inner">
+                            <div class="topic-content">
                                 <div class="qa-grid">
                                     <div class="qa-card">
                                         <h4>Web App vs Native App</h4>
-                                        <p>Native apps are built specifically for a platform with full hardware access. Web apps run in a browser and are cross-platform.</p>
+                                        <p>Native apps are built specifically for a platform (Java/Kotlin) with full hardware access. Web apps run in a browser with restricted access.</p>
                                     </div>
                                     <div class="qa-card">
                                         <h4>Android Activity</h4>
-                                        <p>Represents a single, independent screen with a user interface to handle user interactions.</p>
+                                        <p>An Activity represents a single, independent screen with a user interface. Its primary function is to handle user interactions.</p>
                                     </div>
                                     <div class="qa-card">
-                                        <h4>DVM vs ART</h4>
-                                        <p>DVM uses Just-In-Time (JIT) compilation. ART uses Ahead-Of-Time (AOT) compilation for faster execution.</p>
+                                        <h4>Dalvik Virtual Machine (DVM)</h4>
+                                        <p>DVM is the legacy Android runtime using Just-In-Time (JIT) compilation. Replaced by ART (Ahead-Of-Time compilation) in modern Android.</p>
+                                    </div>
+                                    <div class="qa-card">
+                                        <h4>ViewGroup</h4>
+                                        <p>An invisible container that holds other Views. Common implementations: <code>LinearLayout</code>, <code>ConstraintLayout</code>, <code>RelativeLayout</code>.</p>
+                                    </div>
+                                    <div class="qa-card">
+                                        <h4>Geocoding & GPS</h4>
+                                        <p>Geocoding converts addresses to Lat/Long coordinates. Reverse Geocoding converts coordinates back to addresses. GPS provides the raw device location.</p>
                                     </div>
                                     <div class="qa-card">
                                         <h4>BroadcastReceiver</h4>
-                                        <p>A component that listens for and responds to system-wide broadcast announcements (e.g., "Battery Low").</p>
+                                        <p>A component that listens for and responds to system-wide broadcast announcements (e.g., "Battery Low", "Boot Completed").</p>
+                                    </div>
+                                    <div class="qa-card">
+                                        <h4>Logcat Window</h4>
+                                        <p>A diagnostic tool in Android Studio displaying system messages, stack traces, and custom log outputs (<code>Log.d()</code>) in real-time.</p>
+                                    </div>
+                                    <div class="qa-card">
+                                        <h4>Permissions (Normal vs Dangerous)</h4>
+                                        <p>Normal permissions (Internet) are auto-granted. Dangerous permissions (Camera, Location) access private user data and must be requested at runtime (API 23+).</p>
+                                    </div>
+                                    <div class="qa-card">
+                                        <h4>ContentResolver</h4>
+                                        <p>The client-side object used to communicate with a ContentProvider, allowing apps to securely query and modify shared data via a URI.</p>
                                     </div>
                                 </div>
                             </div>
@@ -641,45 +764,54 @@ public ArrayList&lt;String&gt; getAllUsers() {
         </div>
     </section>
 
+    <!-- Predicted Paper Section -->
     <section id="paper" class="section">
         <div class="container">
             <h2>Predicted Examination Paper</h2>
             <p>A consolidated Mega-Mock paper based on aggregated statistical probabilities and historical BCU evaluation trends.</p>
             
-            <div class="paper-card" style="margin-top: 48px;">
-                <div class="confidential-tag">BCU MEGA MOCK</div>
+            <div class="paper-card" style="margin-top: 40px;">
+                <div class="confidential-tag">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    BCU MEGA MOCK
+                </div>
                 
                 <h3 style="margin-top: 16px;">Section A (2 Marks - Answer Any 6)</h3>
-                <ol>
+                <ol class="custom-list" style="margin-top: 16px;">
                     <li>What is an Android Intent?</li>
                     <li>Define Content Provider in Android.</li>
                     <li>What is the Dalvik Virtual Machine (DVM)?</li>
                     <li>What does onSaveInstanceState() do?</li>
-                    <li>Differentiate fundamentally between a Web App and a Native Mobile App.</li>
                     <li>Explain the function of GPS and Geocoding in an Android device.</li>
+                    <li>Name two types of dialogs in Android.</li>
+                    <li>What is the precise purpose of the AndroidManifest.xml file?</li>
+                    <li>What is the role of the Logcat window?</li>
                 </ol>
 
                 <h3 style="margin-top: 40px;">Section B (5 Marks - Answer Any 4)</h3>
-                <ol>
+                <ol class="custom-list" style="margin-top: 16px;">
                     <li>Compare LinearLayout and ConstraintLayout with examples.</li>
                     <li>Explain how to persist data using SharedPreferences (apply vs commit).</li>
                     <li>Discuss the detailed sequence of steps required to generate and sign an APK file.</li>
                     <li>Explain ART and DVM. What are the differences between them?</li>
+                    <li>Describe the differences between an Options Menu and a Context Menu.</li>
                     <li>Outline the fundamental programmatic steps involved in consuming Web Services using an HttpURLConnection.</li>
                 </ol>
 
                 <h3 style="margin-top: 40px;">Section C (8/10 Marks - Answer Any 4)</h3>
-                <ol>
+                <ol class="custom-list" style="margin-top: 16px;">
                     <li>Draw and explain the complete Android Activity Life Cycle in detail, documenting state changes.</li>
-                    <li>Detail the complete procedural workflow for performing CRUD operations in an SQLite Database using SQLiteOpenHelper.</li>
+                    <li>Detail the complete procedural workflow for performing CRUD operations in an SQLite Database using SQLiteOpenHelper. Include relevant Java code snippets.</li>
                     <li>Explain the Android Architecture software stack in exhaustive detail with a layered diagram.</li>
-                    <li>Explain the four core Android Application Components in exhaustive detail.</li>
+                    <li>Explain the four core Android Application Components (Activities, Services, Broadcast Receivers, Content Providers) in exhaustive detail.</li>
                     <li>What is a Fragment? Explain the fragment lifecycle and how it differs from an Activity.</li>
+                    <li>Explain the modern Android Notifications Framework (API 26+) and the use of Notification Channels.</li>
                 </ol>
             </div>
         </div>
     </section>
 
+    <!-- Exam Strategy Section -->
     <section id="strategy" class="section">
         <div class="container">
             <h2>Exam Formatting Strategy</h2>
@@ -687,52 +819,52 @@ public ArrayList&lt;String&gt; getAllUsers() {
             
             <div class="strategy-grid">
                 <div class="strategy-item">
-                    <h3>2-Mark Questions</h3>
+                    <h3>2-Mark Questions <span>⚡</span></h3>
                     <p><strong>Rule: Get in, define, get out.</strong></p>
-                    <ul style="margin:0; font-size: 0.95rem;">
-                        <li>Write exactly 2 to 3 sentences.</li>
-                        <li>No diagrams. No code.</li>
+                    <p>Write exactly 2 to 3 sentences. No diagrams. No code unless explicitly asked.</p>
+                    <ul class="custom-list" style="font-size: 0.9rem; margin-top: 16px;">
                         <li>Sentence 1: Technical definition.</li>
-                        <li>Sentence 2: Real-world analogy.</li>
+                        <li>Sentence 2: Primary purpose / real-world analogy.</li>
                     </ul>
                 </div>
                 
                 <div class="strategy-item">
-                    <h3>5-Mark Questions</h3>
+                    <h3>5-Mark Questions <span>📄</span></h3>
                     <p><strong>Rule: Structure over length.</strong></p>
-                    <ul style="margin:0; font-size: 0.95rem;">
-                        <li>Target 1 to 1.5 pages.</li>
-                        <li>Break into strict sub-headings.</li>
-                        <li>Include a 4-5 line core code snippet. Underline keywords.</li>
+                    <p>Target 1 to 1.5 pages. Break answer into strict sub-headings.</p>
+                    <ul class="custom-list" style="font-size: 0.9rem; margin-top: 16px;">
+                        <li>Header 1: Definition & Purpose.</li>
+                        <li>Header 2: Core Components (bullet points).</li>
+                        <li>Header 3: 4-5 line core code snippet. Underline keywords.</li>
                     </ul>
                 </div>
 
                 <div class="strategy-item">
-                    <h3>8/10-Mark Questions</h3>
+                    <h3>8/10-Mark Questions <span>📐</span></h3>
                     <p><strong>Rule: The Blueprint Approach.</strong></p>
-                    <ul style="margin:0; font-size: 0.95rem;">
-                        <li>Target 2.5 to 3 pages.</li>
-                        <li>Phase 1: Neat block diagram (Boxed).</li>
-                        <li>Phase 2: Component breakdown.</li>
-                        <li>Phase 3: Substantial commented code block.</li>
+                    <p>Target 2.5 to 3 pages. Requires architectural depth.</p>
+                    <ul class="custom-list" style="font-size: 0.9rem; margin-top: 16px;">
+                        <li>Phase 1: Introduction.</li>
+                        <li>Phase 2: Neat block diagram (Boxed).</li>
+                        <li>Phase 3: Component breakdown.</li>
+                        <li>Phase 4: Substantial commented code block.</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="circle-anim"></div>
-            <h2 style="font-size: 1.75rem; max-width: 800px; margin: 0 auto 1rem; color: var(--text-primary);">
+            <h2 class="footer-quote">
                 "Success is not determined by how much you study today, but by how effectively you revise what truly matters."
             </h2>
-            <p style="font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary);">
-                Best Wishes for Your Examination.
-            </p>
-            <div style="margin-top: 60px; font-size: 0.9rem; color: var(--text-secondary);">
-                <strong>MADonMAD</strong><br>
-                Built for smart preparation.
+            
+            <div class="footer-signature">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 8px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <strong>BEST WISHES FOR YOUR EXAMINATION</strong>
+                <span style="margin-top: 16px; opacity: 0.6;">MADonMAD — Built for BCU Students</span>
             </div>
         </div>
     </footer>
@@ -740,16 +872,14 @@ public ArrayList&lt;String&gt; getAllUsers() {
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            /* --- THEME TOGGLE --- */
+            // --- 1. THEME MANAGEMENT ---
             const themeBtn = document.getElementById('theme-toggle');
-            const savedTheme = localStorage.getItem('mad-theme');
+            const themeText = document.getElementById('theme-text');
             
+            const savedTheme = localStorage.getItem('mad-theme');
             if (savedTheme === 'dark') {
                 document.documentElement.setAttribute('data-theme', 'dark');
-                themeBtn.innerText = "Light Mode";
-            } else {
-                document.documentElement.removeAttribute('data-theme');
-                themeBtn.innerText = "Dark Mode";
+                themeText.innerText = "Light";
             }
 
             themeBtn.addEventListener('click', () => {
@@ -757,25 +887,25 @@ public ArrayList&lt;String&gt; getAllUsers() {
                 if (currentTheme === 'dark') {
                     document.documentElement.removeAttribute('data-theme');
                     localStorage.setItem('mad-theme', 'light');
-                    themeBtn.innerText = "Dark Mode";
+                    themeText.innerText = "Dark";
                 } else {
                     document.documentElement.setAttribute('data-theme', 'dark');
                     localStorage.setItem('mad-theme', 'dark');
-                    themeBtn.innerText = "Light Mode";
+                    themeText.innerText = "Light";
                 }
             });
 
-            /* --- ACCORDION LOGIC --- */
+            // --- 2. SMOOTH ACCORDIONS ---
             const topicHeaders = document.querySelectorAll('.topic-header');
             topicHeaders.forEach(header => {
                 header.addEventListener('click', (e) => {
                     if (e.target.classList.contains('custom-checkbox')) return;
-                    const card = header.closest('.topic-card');
+                    const card = header.parentElement;
                     card.classList.toggle('open');
                 });
             });
 
-            /* --- PROGRESS TRACKER --- */
+            // --- 3. PROGRESS TRACKER & SVG CIRCLE ---
             const checkboxes = document.querySelectorAll('.topic-check');
             const progressRing = document.getElementById('progress-ring');
             const progressText = document.getElementById('progress-text');
@@ -799,8 +929,7 @@ public ArrayList&lt;String&gt; getAllUsers() {
 
             function updateDashboard() {
                 const completed = document.querySelectorAll('.topic-check:checked').length;
-                let percentage = 0;
-                if(totalTopics > 0) percentage = Math.round((completed / totalTopics) * 100);
+                let percentage = totalTopics > 0 ? Math.round((completed / totalTopics) * 100) : 0;
                 
                 progressText.innerText = `${percentage}%`;
                 const offset = circumference - (percentage / 100) * circumference;
@@ -808,13 +937,13 @@ public ArrayList&lt;String&gt; getAllUsers() {
                 
                 if (percentage === 0) {
                     readinessTitle.innerText = "Initiate Preparation";
-                    readinessDesc.innerText = "Select topics below to begin tracking your exam readiness.";
+                    readinessDesc.innerText = "Select topics in the Data Bank below to begin tracking your exam readiness.";
                 } else if (percentage < 40) {
                     readinessTitle.innerText = "Building Foundations";
                     readinessDesc.innerText = "You are laying the groundwork. Keep studying the core structures.";
                 } else if (percentage < 80) {
                     readinessTitle.innerText = "Solidifying Concepts";
-                    readinessDesc.innerText = "Excellent progress. Focus on code implementations.";
+                    readinessDesc.innerText = "Excellent progress. Focus on code implementations and diagrams.";
                 } else if (percentage < 100) {
                     readinessTitle.innerText = "Exam Ready";
                     readinessDesc.innerText = "You are highly prepared. Review the paper strategy.";
@@ -829,11 +958,20 @@ public ArrayList&lt;String&gt; getAllUsers() {
                 checkboxes.forEach((cb, index) => { state[index] = cb.checked; });
                 localStorage.setItem('mad-progress', JSON.stringify(state));
             }
-            setTimeout(updateDashboard, 100); 
+            
+            setTimeout(updateDashboard, 300); 
 
-            /* --- SEARCH SYSTEM --- */
+            // --- 4. COMMAND PALETTE SEARCH ---
             const searchInput = document.getElementById('searchInput');
             const topicCards = document.querySelectorAll('.topic-card');
+
+            // Global shortcut Cmd+K / Ctrl+K
+            document.addEventListener('keydown', (e) => {
+                if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                    e.preventDefault();
+                    searchInput.focus();
+                }
+            });
 
             searchInput.addEventListener('input', (e) => {
                 const term = e.target.value.toLowerCase();
@@ -849,10 +987,10 @@ public ArrayList&lt;String&gt; getAllUsers() {
                 });
             });
 
-            /* --- SCROLL PROGRESS & NAV HIGHLIGHT --- */
+            // --- 5. SCROLL PROGRESS & ACTIVE NAV ---
             const topBar = document.getElementById('progress-bar');
             const sections = document.querySelectorAll('.section');
-            const navItems = document.querySelectorAll('.nav-links a');
+            const navItems = document.querySelectorAll('.nav-item');
 
             window.addEventListener('scroll', () => {
                 const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -861,10 +999,9 @@ public ArrayList&lt;String&gt; getAllUsers() {
                 topBar.style.width = scrolled + '%';
 
                 let current = '';
-                // Adjusted offset logic to account for floating nav
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop;
-                    if (scrollY >= sectionTop - 250) {
+                    if (scrollY >= sectionTop - 150) {
                         current = section.getAttribute('id');
                     }
                 });
@@ -877,12 +1014,13 @@ public ArrayList&lt;String&gt; getAllUsers() {
                 });
             });
 
-            /* --- COPY CODE --- */
+            // --- 6. COPY CODE ---
             const copyBtns = document.querySelectorAll('.copy-btn');
             copyBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
                     const codeElement = btn.previousElementSibling;
                     if(!codeElement) return;
+                    
                     const text = codeElement.innerText;
                     const textArea = document.createElement("textarea");
                     textArea.value = text;
