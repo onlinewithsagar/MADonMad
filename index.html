@@ -7,7 +7,6 @@
     <meta name="description" content="Master Mobile Application Development for the BCU BCA Examination. High-yield notes, predicted papers, and strategies.">
     
     <style>
-        /* --- 1. CSS VARIABLES & THEME SYSTEM --- */
         :root {
             --bg-primary: #ffffff;
             --bg-secondary: #f4f4f5;
@@ -40,7 +39,6 @@
             --search-bg: rgba(0, 0, 0, 0.95);
         }
 
-        /* --- 2. RESET & BASE TYPOGRAPHY --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; font-size: 16px; }
         body {
@@ -52,7 +50,6 @@
         }
 
         .solid-bg { background-color: var(--bg-primary); }
-
         h1, h2, h3, h4 { font-weight: 800; line-height: 1.2; letter-spacing: -0.03em; }
         h1 { font-size: 3.5rem; letter-spacing: -0.05em; }
         h2 { font-size: 2.5rem; margin-bottom: 1.5rem; }
@@ -66,7 +63,6 @@
         ul, ol { margin-bottom: 1.5rem; padding-left: 1.5rem; color: var(--text-secondary); }
         li { margin-bottom: 0.5rem; }
 
-        /* --- 3. LAYOUT & UTILITIES --- */
         .container { max-width: 900px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
         .section { padding: 120px 0; }
         .section-sm { padding: 40px 0; }
@@ -75,9 +71,7 @@
         .text-center { text-align: center; }
         
         .badge { display: inline-block; padding: 4px 10px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; background: var(--text-primary); color: var(--bg-primary); border-radius: 99px; margin-left: 12px; vertical-align: middle; }
-        .badge.outline { background: transparent; color: var(--text-primary); border: 1px solid var(--text-primary); }
 
-        /* --- 4. FLOATING NAVIGATION --- */
         nav {
             position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
             width: calc(100% - 32px); max-width: 900px; z-index: 200;
@@ -107,7 +101,6 @@
         
         #progress-bar { position: fixed; top: 0; left: 0; height: 4px; background: var(--text-primary); width: 0%; z-index: 300; transition: width 0.1s; }
 
-        /* --- 5. HERO SECTION --- */
         .hero { padding: 180px 0 60px; }
         .hero p { font-size: 1.25rem; max-width: 700px; margin: 0 auto; color: var(--text-secondary); font-weight: 500; }
         
@@ -117,7 +110,6 @@
         .stat-card h3 { font-size: 3rem; margin-bottom: 8px; color: var(--text-primary); letter-spacing: -0.05em; }
         .stat-card p { font-size: 0.875rem; font-weight: 800; text-transform: uppercase; margin: 0; color: var(--text-secondary); letter-spacing: 0.05em; }
 
-        /* --- 6. STICKY SEARCH BAR --- */
         .sticky-search-wrapper {
             position: sticky; top: 90px; z-index: 150;
             padding: 16px 0; background-color: var(--search-bg);
@@ -135,7 +127,6 @@
         .search-box input:focus { border-color: var(--text-primary); background: var(--bg-primary); }
         .search-icon { position: absolute; left: 44px; top: 50%; transform: translateY(-50%); opacity: 0.5; pointer-events: none; }
 
-        /* --- 7. ACCORDION (TOPICS) --- */
         .topic-group-title { font-size: 1.5rem; margin: 64px 0 24px; padding-bottom: 16px; border-bottom: 2px solid var(--border-heavy); }
         
         .topic-card { border: 1px solid var(--border-color); border-radius: var(--radius-md); margin-bottom: 16px; background: var(--bg-primary); transition: var(--transition-fast); overflow: hidden; }
@@ -168,29 +159,31 @@
         .custom-checkbox:checked { background: var(--text-primary); border-color: var(--text-primary); }
         .custom-checkbox:checked::before { transform: scale(1); }
 
-        /* --- 8. INSTAGRAM-STYLE FLASHCARDS --- */
+        .story-wrapper { margin: 32px 0 64px; display: flex; justify-content: center; }
         .story-container {
-            display: flex; gap: 16px; overflow-x: auto; padding: 16px 0 32px;
-            scroll-snap-type: x mandatory; -ms-overflow-style: none; scrollbar-width: none;
-            scroll-behavior: smooth;
+            width: 100%; max-width: 400px; height: 500px;
+            border: 2px solid var(--border-heavy); border-radius: var(--radius-lg);
+            background: var(--bg-secondary); position: relative; overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08); display: flex; flex-direction: column;
         }
-        .story-container::-webkit-scrollbar { display: none; }
-        .story-card {
-            min-width: 300px; max-width: 300px; height: 380px; flex-shrink: 0;
-            border: 2px solid var(--border-color); border-radius: var(--radius-lg);
-            background: var(--bg-secondary); padding: 24px; position: relative;
-            scroll-snap-align: center; display: flex; flex-direction: column;
-            transition: var(--transition-fast);
+        .story-progress-container {
+            display: flex; gap: 4px; padding: 16px 16px 0; width: 100%; position: absolute; top: 0; left: 0; z-index: 10;
         }
-        .story-card:hover { border-color: var(--text-primary); transform: translateY(-4px); }
-        .story-progress { display: flex; gap: 4px; margin-bottom: 24px; width: 100%; }
-        .story-segment { height: 4px; flex-grow: 1; background: var(--border-color); border-radius: 2px; }
+        .story-segment { height: 4px; flex-grow: 1; background: var(--border-color); border-radius: 2px; transition: background 0.3s; }
         .story-segment.active { background: var(--text-primary); }
         
-        .story-card h4 { font-size: 1.25rem; margin: 0 0 16px 0; border: none; padding: 0; line-height: 1.3; }
-        .story-card p { font-size: 1rem; color: var(--text-secondary); margin: 0; line-height: 1.6; overflow-y: auto; }
+        .story-content {
+            flex-grow: 1; padding: 48px 32px 32px; display: flex; flex-direction: column; justify-content: center;
+            text-align: center; user-select: none;
+        }
+        .story-content h4 { font-size: 1.5rem; margin: 0 0 16px 0; border: none; padding: 0; }
+        .story-content p { font-size: 1.1rem; color: var(--text-secondary); margin: 0; line-height: 1.6; }
         
-        /* --- 9. CODE & DIAGRAMS --- */
+        /* Tap Zones */
+        .tap-zone-left { position: absolute; top: 0; left: 0; width: 40%; height: 100%; z-index: 5; cursor: pointer; }
+        .tap-zone-right { position: absolute; top: 0; right: 0; width: 60%; height: 100%; z-index: 5; cursor: pointer; }
+        .story-hint { position: absolute; bottom: 16px; left: 0; width: 100%; text-align: center; font-size: 0.75rem; font-weight: 700; color: var(--border-color); text-transform: uppercase; letter-spacing: 0.1em; pointer-events: none; }
+
         pre { background: var(--code-bg); border: 1px solid var(--border-color); padding: 24px; border-radius: var(--radius-md); overflow-x: auto; margin: 24px 0; position: relative; }
         code { font-family: var(--font-mono); font-size: 0.875rem; color: var(--text-primary); }
         .copy-btn { position: absolute; top: 12px; right: 12px; padding: 6px 12px; font-size: 0.75rem; border-radius: 6px; background: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-primary); cursor: pointer; transition: var(--transition-fast); font-weight: 700; z-index: 5;}
@@ -200,7 +193,6 @@
         .block-layer { padding: 16px; border: 1px solid var(--border-color); text-align: center; font-weight: 700; font-family: var(--font-mono); font-size: 0.875rem; background: var(--bg-primary); border-radius: 6px; transition: var(--transition-fast); }
         .block-layer:hover { border-color: var(--text-primary); }
 
-        /* --- 10. DASHBOARD & SVG CIRCLE --- */
         .dashboard-card {
             border: 2px solid var(--border-color); border-radius: var(--radius-lg);
             padding: 48px; display: flex; align-items: center; justify-content: space-between;
@@ -212,7 +204,6 @@
         .progress-bar-svg { fill: none; stroke: var(--text-primary); stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset 1s cubic-bezier(0.16, 1, 0.3, 1); }
         .progress-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 2rem; font-weight: 800; letter-spacing: -0.05em; }
 
-        /* --- 11. STRATEGY & PAPER --- */
         .paper-card { border: 2px solid var(--border-heavy); border-radius: var(--radius-lg); padding: 48px; position: relative; background: var(--bg-primary); margin-bottom: 40px; box-shadow: 0 12px 40px rgba(0,0,0,0.03); }
         .confidential-tag { position: absolute; top: -16px; left: 40px; background: var(--text-primary); color: var(--bg-primary); padding: 4px 16px; font-weight: 900; font-family: var(--font-mono); letter-spacing: 0.1em; font-size: 0.9rem; border-radius: 4px; }
         
@@ -220,10 +211,8 @@
         .strategy-item { padding: 32px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-lg); }
         .strategy-item h3 { padding-bottom: 16px; border-bottom: 2px solid var(--border-heavy); margin-bottom: 16px; }
 
-        /* --- 12. FOOTER --- */
         footer { padding: 120px 0 80px; text-align: center; border-top: 1px solid var(--border-color); background: var(--bg-primary); }
         
-        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
             nav { border-radius: 0; top: 0; width: 100%; max-width: 100%; border-left: none; border-right: none; border-top: none; }
@@ -234,7 +223,7 @@
             .nav-links { -ms-overflow-style: none; scrollbar-width: none; }
 
             .hero { padding: 140px 0 40px; }
-            .sticky-search-wrapper { top: 105px; } /* Adjust for expanded mobile nav */
+            .sticky-search-wrapper { top: 105px; }
 
             .dashboard-card { flex-direction: column; text-align: center; gap: 32px; padding: 32px 24px; }
             .topic-content { padding: 0 20px 24px 20px; }
@@ -242,7 +231,8 @@
             .topic-title-area { font-size: 1rem; align-items: flex-start; }
             .custom-checkbox { margin-top: 2px; } 
             
-            .story-card { min-width: 260px; max-width: 260px; height: 360px; }
+            .story-container { max-width: 100%; height: 450px; border-radius: var(--radius-md); }
+            
             .paper-card { padding: 40px 20px 20px; }
             .confidential-tag { left: 20px; }
         }
@@ -252,7 +242,6 @@
 
     <div id="progress-bar"></div>
 
-    <!-- Navigation -->
     <nav>
         <div class="nav-inner">
             <div class="brand">✦ MADonMAD</div>
@@ -267,7 +256,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <header id="hero" class="hero text-center">
         <div class="container">
             <h1>Master Mobile Application<br>Development.</h1>
@@ -290,15 +278,13 @@
         </div>
     </header>
 
-    <!-- Sticky Search Palette -->
     <div class="sticky-search-wrapper">
         <div class="search-box">
             <svg class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <input type="text" id="searchInput" placeholder="Search architectures, lifecycles, SQLite, Intents...">
+            <input type="text" id="searchInput" placeholder="Search predicted questions, topics, or code (e.g. 'SQLite', 'Lifecycle')...">
         </div>
     </div>
 
-    <!-- Data Bank (Topics) Section -->
     <section id="topics" class="section-sm" style="padding-top: 0;">
         <div class="container">
             
@@ -621,6 +607,34 @@ public ArrayList&lt;String&gt; getAllUsers() {
                     </div>
                 </div>
 
+                <!-- TOPIC: Core Components -->
+                <div class="topic-card">
+                    <div class="topic-header">
+                        <div class="topic-title-area">
+                            <input type="checkbox" class="custom-checkbox topic-check" aria-label="Mark completed">
+                            Four Core Components & Broadcast Receivers
+                            <span class="badge">10M</span>
+                        </div>
+                        <svg class="topic-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                    <div class="topic-content-wrapper">
+                        <div class="topic-content-inner">
+                            <div class="topic-content">
+                                <h4>Four Core Application Components</h4>
+                                <ul>
+                                    <li><strong>Activities:</strong> The UI presentation layer representing a single screen.</li>
+                                    <li><strong>Services:</strong> Background processing workhorses (no UI).</li>
+                                    <li><strong>Broadcast Receivers:</strong> System-wide event listeners.</li>
+                                    <li><strong>Content Providers:</strong> Secure inter-process data sharing managers.</li>
+                                </ul>
+
+                                <h4>Broadcast Receiver: Real-World Example</h4>
+                                <p>A Broadcast Receiver listens for global events. For example, registering a receiver to listen for <code>Intent.ACTION_BATTERY_LOW</code>. When triggered, the receiver can automatically pause heavy background downloads to save power, or listening for <code>Intent.ACTION_AIRPLANE_MODE_CHANGED</code> to alert the user that network calls will fail.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- TOPIC: Modern Concepts -->
                 <div class="topic-card">
                     <div class="topic-header">
@@ -649,52 +663,62 @@ manager.createNotificationChannel(channel);</code><button class="copy-btn">Copy<
                     </div>
                 </div>
 
+                <!-- TOPIC: Location Based Services -->
+                <div class="topic-card">
+                    <div class="topic-header">
+                        <div class="topic-title-area">
+                            <input type="checkbox" class="custom-checkbox topic-check" aria-label="Mark completed">
+                            Google Maps Integration & Location Services
+                            <span class="badge">8M</span>
+                        </div>
+                        <svg class="topic-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                    <div class="topic-content-wrapper">
+                        <div class="topic-content-inner">
+                            <div class="topic-content">
+                                <h4>Google Maps Integration Workflow</h4>
+                                <ol>
+                                    <li>Get Google Maps API key from Google Cloud Console.</li>
+                                    <li>Add Dependencies in <code>build.gradle</code>.</li>
+                                    <li>Add API key inside <code>&lt;meta-data&gt;</code> tag and location permissions in <code>AndroidManifest.xml</code>.</li>
+                                    <li>Add <code>SupportMapFragment</code> in XML layout.</li>
+                                    <li>Implement <code>OnMapReadyCallback</code> in the Activity to manipulate the map.</li>
+                                </ol>
+                                
+                                <h4>Location Services (LBS)</h4>
+                                <p>Use <code>FusedLocationProviderClient</code> (Google Play Services) instead of legacy LocationManager for battery efficiency. Features include Geofencing, Mapping, and POI discovery.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <h3 class="topic-group-title">Quick Revision: 2-Mark Flashcards</h3>
-                <div class="story-container">
-                    
-                    <div class="story-card">
-                        <div class="story-progress"><div class="story-segment active"></div><div class="story-segment"></div></div>
-                        <h4>Web App vs Native App</h4>
-                        <p>Native apps are built specifically for a platform (Java/Kotlin for Android) with full hardware access. Web apps run in a browser and are cross-platform but have restricted hardware access.</p>
+                <p>Tap left or right to navigate through the flashcards.</p>
+                
+                <div class="story-wrapper">
+                    <div class="story-container">
+                        <!-- Progress Bars -->
+                        <div class="story-progress-container" id="story-bars">
+                            <!-- Injected by JS -->
+                        </div>
+                        
+                        <!-- Content -->
+                        <div class="story-content" id="story-content">
+                            <!-- Injected by JS -->
+                        </div>
+                        
+                        <!-- Tap Zones -->
+                        <div class="tap-zone-left" id="tap-left"></div>
+                        <div class="tap-zone-right" id="tap-right"></div>
+                        
+                        <div class="story-hint">Tap to navigate</div>
                     </div>
-
-                    <div class="story-card">
-                        <div class="story-progress"><div class="story-segment"></div><div class="story-segment active"></div></div>
-                        <h4>Android Intent</h4>
-                        <p>A messaging object used to request an action from another app component. It is primarily used to start Activities, start Services, or deliver Broadcasts.</p>
-                    </div>
-
-                    <div class="story-card">
-                        <div class="story-progress"><div class="story-segment active"></div><div class="story-segment"></div></div>
-                        <h4>Android Activity</h4>
-                        <p>An Activity represents a single, independent screen with a user interface. Its primary function is to handle user interactions.</p>
-                    </div>
-
-                    <div class="story-card">
-                        <div class="story-progress"><div class="story-segment"></div><div class="story-segment active"></div></div>
-                        <h4>ViewGroup</h4>
-                        <p>A ViewGroup is an invisible container that holds other Views or ViewGroups to define layout structure. Common implementations: <code>LinearLayout</code>, <code>ConstraintLayout</code>.</p>
-                    </div>
-
-                    <div class="story-card">
-                        <div class="story-progress"><div class="story-segment active"></div><div class="story-segment"></div></div>
-                        <h4>Geocoding & Reverse</h4>
-                        <p>Geocoding converts human-readable addresses (e.g., "Bengaluru") to Lat/Long coordinates. Reverse Geocoding converts coordinates back into physical addresses.</p>
-                    </div>
-
-                    <div class="story-card">
-                        <div class="story-progress"><div class="story-segment"></div><div class="story-segment active"></div></div>
-                        <h4>XML Webservice</h4>
-                        <p>A standardized protocol using XML format to encode data, allowing client and server applications to communicate securely over the internet.</p>
-                    </div>
-
                 </div>
 
             </div>
         </div>
     </section>
 
-    <!-- Dashboard Section -->
     <section id="dashboard" class="section solid-bg">
         <div class="container">
             <h2>Student Success Dashboard</h2>
@@ -717,7 +741,6 @@ manager.createNotificationChannel(channel);</code><button class="copy-btn">Copy<
         </div>
     </section>
 
-    <!-- Predicted Paper Section (REORDERED) -->
     <section id="paper" class="section">
         <div class="container">
             <h2>Examination Papers & Predictions</h2>
@@ -828,7 +851,6 @@ manager.createNotificationChannel(channel);</code><button class="copy-btn">Copy<
         </div>
     </section>
 
-    <!-- Exam Strategy Section -->
     <section id="strategy" class="section solid-bg">
         <div class="container">
             <h2>Exam Formatting Strategy</h2>
@@ -871,7 +893,6 @@ manager.createNotificationChannel(channel);</code><button class="copy-btn">Copy<
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <h2 style="font-size: 2rem; max-width: 800px; margin: 0 auto 1rem; line-height: 1.4;">
@@ -919,9 +940,7 @@ manager.createNotificationChannel(channel);</code><button class="copy-btn">Copy<
             const topicHeaders = document.querySelectorAll('.topic-header');
             topicHeaders.forEach(header => {
                 header.addEventListener('click', (e) => {
-                    // Prevent checkbox click from triggering accordion twice
                     if (e.target.classList.contains('custom-checkbox')) return;
-                    
                     const card = header.parentElement;
                     card.classList.toggle('open');
                 });
@@ -935,17 +954,14 @@ manager.createNotificationChannel(channel);</code><button class="copy-btn">Copy<
             const readinessDesc = document.getElementById('readiness-desc');
             const totalTopics = checkboxes.length;
             
-            // SVG Circle Math
             const radius = progressRing.r.baseVal.value;
             const circumference = radius * 2 * Math.PI;
             progressRing.style.strokeDasharray = `${circumference} ${circumference}`;
             progressRing.style.strokeDashoffset = circumference;
 
-            // Load State
             const savedProgress = JSON.parse(localStorage.getItem('mad-progress')) || {};
             checkboxes.forEach((cb, index) => {
                 if (savedProgress[index]) cb.checked = true;
-                
                 cb.addEventListener('change', () => {
                     updateDashboard();
                     saveProgress();
@@ -988,7 +1004,6 @@ manager.createNotificationChannel(channel);</code><button class="copy-btn">Copy<
                 });
                 localStorage.setItem('mad-progress', JSON.stringify(state));
             }
-            
             setTimeout(updateDashboard, 300); 
 
             // --- 4. SEARCH SYSTEM ---
@@ -1015,13 +1030,11 @@ manager.createNotificationChannel(channel);</code><button class="copy-btn">Copy<
             const navItems = document.querySelectorAll('.nav-item');
 
             window.addEventListener('scroll', () => {
-                // Top Progress Bar
                 const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
                 const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
                 const scrolled = (winScroll / height) * 100;
                 topBar.style.width = scrolled + '%';
 
-                // Active Nav Highlight
                 let current = '';
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop;
@@ -1062,6 +1075,60 @@ manager.createNotificationChannel(channel);</code><button class="copy-btn">Copy<
                     document.body.removeChild(textArea);
                 });
             });
+
+            // --- 7. INSTAGRAM STORY FLASHCARDS ---
+            const flashcardData = [
+                { title: "Web App vs Native App", content: "Native apps are built specifically for a platform (Java/Kotlin for Android) with full hardware access. Web apps run in a browser and are cross-platform but have restricted hardware access." },
+                { title: "Android Intent", content: "A messaging object used to request an action from another app component. It is primarily used to start Activities, start Services, or deliver Broadcasts." },
+                { title: "Android Activity", content: "An Activity represents a single, independent screen with a user interface. Its primary function is to handle user interactions." },
+                { title: "ViewGroup", content: "A ViewGroup is an invisible container that holds other Views or ViewGroups to define layout structure. Common implementations: LinearLayout, ConstraintLayout." },
+                { title: "Geocoding & Reverse", content: "Geocoding converts human-readable addresses (e.g., 'Bengaluru') to Lat/Long coordinates. Reverse Geocoding converts coordinates back into physical addresses." },
+                { title: "XML Webservice", content: "A standardized protocol using XML format to encode data, allowing client and server applications to communicate securely over the internet." },
+                { title: "AndroidManifest.xml", content: "The structural blueprint read by the OS. It declares components, requests hardware permissions, and sets the entry Activity." },
+                { title: "Logcat Window", content: "A diagnostic tool in Android Studio that displays system messages, stack traces, and custom log outputs (e.g., Log.d()) in real-time." }
+            ];
+
+            let currentStoryIndex = 0;
+            const storyBarsContainer = document.getElementById('story-bars');
+            const storyContent = document.getElementById('story-content');
+            const tapLeft = document.getElementById('tap-left');
+            const tapRight = document.getElementById('tap-right');
+
+            // Initialize Story Bars
+            flashcardData.forEach((_, index) => {
+                const bar = document.createElement('div');
+                bar.className = 'story-segment';
+                storyBarsContainer.appendChild(bar);
+            });
+            const storySegments = document.querySelectorAll('.story-segment');
+
+            function renderStory(index) {
+                // Update Content
+                storyContent.innerHTML = `
+                    <h4>${flashcardData[index].title}</h4>
+                    <p>${flashcardData[index].content}</p>
+                `;
+                // Update Bars
+                storySegments.forEach((bar, i) => {
+                    if (i <= index) bar.classList.add('active');
+                    else bar.classList.remove('active');
+                });
+            }
+
+            tapRight.addEventListener('click', () => {
+                currentStoryIndex++;
+                if (currentStoryIndex >= flashcardData.length) currentStoryIndex = 0; // Loop
+                renderStory(currentStoryIndex);
+            });
+
+            tapLeft.addEventListener('click', () => {
+                currentStoryIndex--;
+                if (currentStoryIndex < 0) currentStoryIndex = flashcardData.length - 1; // Loop back
+                renderStory(currentStoryIndex);
+            });
+
+            // Initial render
+            renderStory(currentStoryIndex);
 
         });
     </script>
